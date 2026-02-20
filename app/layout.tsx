@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { ServiceWorkerRegister } from '@/components/pwa/ServiceWorkerRegister'
 import { InstallBanner } from '@/components/pwa/InstallBanner'
+import { Analytics } from '@vercel/analytics/next'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
@@ -32,6 +33,7 @@ export default function RootLayout({
         <ServiceWorkerRegister />
         <InstallBanner />
         {children}
+        <Analytics />
       </body>
     </html>
   )
