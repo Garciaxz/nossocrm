@@ -41,7 +41,7 @@ export default async function Painel() {
 
     return (
       <div>
-        <h1 className="mb-6 text-lg font-semibold text-marca-900">Painel</h1>
+        <h1 className="mb-6 text-xl font-semibold text-marca-900">Painel</h1>
         <div className="overflow-x-auto rounded-lg border border-marca-200 bg-white">
           <table className="w-full text-sm">
             <thead className="bg-marca-50 text-left text-neutral-600">
@@ -102,7 +102,7 @@ export default async function Painel() {
 
   return (
     <div>
-      <h1 className="mb-6 text-lg font-semibold text-marca-900">Painel</h1>
+      <h1 className="mb-6 text-xl font-semibold text-marca-900">Painel</h1>
 
       {!!sla?.length && (
         <div className="mb-6 rounded-lg border border-red-300 bg-red-50 p-4">
@@ -126,10 +126,12 @@ export default async function Painel() {
         <CardKpi rotulo="SLA estourado" valor={String(sla?.length ?? 0)} />
       </div>
 
-      <h2 className="mb-3 text-sm font-medium text-neutral-600">Funil</h2>
+      <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-neutral-500">
+        Funil
+      </h2>
       <div className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-5">
         {ETAPAS.filter((e) => e.chave !== "ganho" && e.chave !== "perdido").map((e) => (
-          <div key={e.chave} className="rounded-lg border border-marca-200 bg-white p-3">
+          <div key={e.chave} className="rounded-lg border border-marca-200 bg-white p-4">
             <p className="text-xs text-neutral-500">{e.rotulo}</p>
             <p className="text-xl font-semibold text-marca-900">
               {porEtapa.get(e.chave)?.total ?? 0}
@@ -138,7 +140,9 @@ export default async function Painel() {
         ))}
       </div>
 
-      <h2 className="mb-3 text-sm font-medium text-neutral-600">Últimos leads recebidos</h2>
+      <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-neutral-500">
+        Últimos leads recebidos
+      </h2>
       <div className="overflow-x-auto rounded-lg border border-marca-200 bg-white">
         <table className="w-full text-sm">
           <thead className="bg-marca-50 text-left text-neutral-600">
