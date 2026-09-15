@@ -76,6 +76,21 @@ export const ROTULO_AMBIENTE: Record<TipoAmbiente, string> = {
   nao_definido: "Não definido",
 };
 
+export const ROTULO_STATUS_MEDICAO: Record<StatusMedicao, string> = {
+  agendada: "Agendada",
+  realizada: "Realizada",
+  cancelada: "Cancelada",
+  nao_compareceu: "Não compareceu",
+};
+
+export const ROTULO_STATUS_ORCAMENTO: Record<StatusOrcamento, string> = {
+  rascunho: "Rascunho",
+  enviado: "Enviado",
+  aceito: "Aceito",
+  recusado: "Recusado",
+  expirado: "Expirado",
+};
+
 export type Perfil = {
   id: string;
   nome: string;
@@ -163,4 +178,41 @@ export type Produto = {
   preco_m2: number | null;
   preco_unidade: number | null;
   ativo: boolean;
+};
+
+export type Atividade = {
+  id: string;
+  lead_id: string;
+  autor_id: string | null;
+  tipo: string;
+  descricao: string;
+  dados: unknown;
+  criado_em: string;
+};
+
+export type Medicao = {
+  id: string;
+  lead_id: string;
+  agendada_para: string;
+  endereco: string;
+  responsavel_nome: string | null;
+  responsavel_telefone: string | null;
+  status: StatusMedicao;
+  metragem_aferida: number | null;
+  observacoes: string | null;
+  criado_em: string;
+};
+
+export type Orcamento = {
+  id: string;
+  lead_id: string;
+  numero: number;
+  status: StatusOrcamento;
+  valor_materiais: number;
+  valor_instalacao: number;
+  desconto: number;
+  valor_total: number;
+  validade_dias: number;
+  enviado_em: string | null;
+  criado_em: string;
 };

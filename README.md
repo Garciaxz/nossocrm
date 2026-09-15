@@ -45,6 +45,7 @@ Criar projeto e rodar no SQL Editor, nesta ordem:
 1. `supabase/01_schema.sql`
 2. `supabase/02_rls.sql`
 3. `supabase/03_seed.sql`
+4. `supabase/04_realtime.sql` — habilita Realtime em `mensagens`, exigido pela conversa do lead (SPEC 3.4)
 
 Criar o primeiro usuário em Authentication → Users, depois promover a gerente:
 
