@@ -27,7 +27,7 @@ export function NavAutenticada({ papel, nome }: { papel: PapelUsuario; nome: str
   const itensVisiveis = ITENS.filter((item) => item.papeis.includes(papel));
 
   return (
-    <header className="flex flex-col gap-3 border-b border-marca-200 bg-white px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+    <header className="flex flex-col gap-3 border-b border-marca-200 bg-white px-4 py-3 print:hidden sm:flex-row sm:items-center sm:justify-between">
       <div className="flex items-center gap-6">
         <span className="text-sm font-semibold text-marca-900">RD Revestimentos</span>
         <nav className="flex flex-wrap gap-1">

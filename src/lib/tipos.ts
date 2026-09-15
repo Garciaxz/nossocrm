@@ -91,6 +91,33 @@ export const ROTULO_STATUS_ORCAMENTO: Record<StatusOrcamento, string> = {
   expirado: "Expirado",
 };
 
+export type KpiChave = "volume_leads" | "taxa_fechamento" | "cpl" | "cac" | "roas";
+
+export const KPIS_DISPONIVEIS: { chave: KpiChave; rotulo: string }[] = [
+  { chave: "volume_leads", rotulo: "Volume de leads" },
+  { chave: "taxa_fechamento", rotulo: "Taxa de fechamento" },
+  { chave: "cpl", rotulo: "CPL (custo por lead)" },
+  { chave: "cac", rotulo: "CAC (custo por venda)" },
+  { chave: "roas", rotulo: "ROAS" },
+];
+
+export type MetricaMensal = {
+  mes: string;
+  origem: OrigemLead;
+  leads: number;
+  ganhos: number;
+  perdidos: number;
+  qualificados: number;
+  receita: number | null;
+  tempo_resposta_medio: number | null;
+  investimento: number | null;
+  cpl: number | null;
+  cac: number | null;
+  roas: number | null;
+  taxa_fechamento_pct: number | null;
+  taxa_qualificacao_pct: number | null;
+};
+
 export type Perfil = {
   id: string;
   nome: string;
