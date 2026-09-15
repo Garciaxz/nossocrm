@@ -135,7 +135,36 @@ src/middleware.ts              proteção de rota, webhook fora do matcher
 src/app/api/webhook/evolution/route.ts   captura completa
 ```
 
-As telas em `src/app` são esqueleto, só para o build validar as rotas.
+Todas as telas do SPEC (seção 3) estão implementadas, não são mais esqueleto:
+login, painel, leads (kanban/tabela/detalhe), orçamento, medição, relatórios,
+biblioteca e configurações. `npm run build` passa com 0 erro de tipo.
+
+---
+
+## Deploy na Vercel
+
+Plano **Pro** (Hobby é uso não comercial, ver aviso abaixo). Conectar o
+repositório e configurar estas variáveis de ambiente (Project Settings →
+Environment Variables), com os mesmos valores do `.env.local`:
+
+```
+NEXT_PUBLIC_SUPABASE_URL
+NEXT_PUBLIC_SUPABASE_ANON_KEY
+SUPABASE_SERVICE_ROLE_KEY
+EVOLUTION_API_URL
+EVOLUTION_API_KEY
+EVOLUTION_INSTANCIA
+EVOLUTION_WEBHOOK_TOKEN
+WHATSAPP_ALERTA_NUMERO
+```
+
+`BLING_CLIENT_ID` e `BLING_CLIENT_SECRET` ficam vazios por enquanto (fase 2,
+fora de escopo — ver SPEC.md seção 5).
+
+Build command e root directory são os padrões do Next.js, não precisa mexer.
+Depois do primeiro deploy, atualizar o webhook na Evolution pra apontar pra
+URL real (`https://SEU_APP.vercel.app/api/webhook/evolution`) e repetir o
+teste da seção 4 acima contra essa URL, não mais contra `localhost`.
 
 ---
 
