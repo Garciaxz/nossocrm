@@ -91,6 +91,30 @@ export const ROTULO_STATUS_ORCAMENTO: Record<StatusOrcamento, string> = {
   expirado: "Expirado",
 };
 
+export const AMBIENTES_BIBLIOTECA = [
+  { chave: "sala", rotulo: "Sala" },
+  { chave: "banheiro", rotulo: "Banheiro" },
+  { chave: "cozinha", rotulo: "Cozinha" },
+  { chave: "fachada", rotulo: "Fachada" },
+  { chave: "recepcao", rotulo: "Recepção" },
+] as const;
+
+export type AmbienteBiblioteca = (typeof AMBIENTES_BIBLIOTECA)[number]["chave"];
+
+export type MidiaBiblioteca = {
+  id: string;
+  titulo: string;
+  descricao: string | null;
+  url: string;
+  mime: string | null;
+  linha_id: string | null;
+  produto_id: string | null;
+  ambiente: string | null;
+  tags: string[] | null;
+  vezes_enviada: number;
+  criado_em: string;
+};
+
 export type KpiChave = "volume_leads" | "taxa_fechamento" | "cpl" | "cac" | "roas";
 
 export const KPIS_DISPONIVEIS: { chave: KpiChave; rotulo: string }[] = [
