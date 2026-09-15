@@ -116,6 +116,22 @@ export async function agendarMedicao(
   revalidatePath(`/leads/${leadId}`);
 }
 
+export async function atualizarMedicao(
+  medicaoId: string,
+  leadId: string,
+  dados: { status: string; metragemAferida?: number | null }
+) {
+  const { supabase } = await usuarioAtual();
+
+  const atualizacao: Record<string, unknown> = { status: dados.status };
+  if (dados.metragemAferida !== undefined) atualizacao.metragem_aferida = dados.metragemAferida;
+
+  const { error } = await supabase.from("medicoes").update(atualizacao).eq("id", medicaoId);
+  if (error) throw new Error(error.message);
+
+  revalidatePath(`/leads/${leadId}`);
+}
+
 export async function atualizarDadosLead(leadId: string, dados: Record<string, unknown>) {
   const { supabase } = await usuarioAtual();
 
