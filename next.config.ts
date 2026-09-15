@@ -1,20 +1,12 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  turbopack: {
-    root: process.cwd(),
-  },
-  async headers() {
-    return [
-      {
-        source: "/sw.js",
-        headers: [
-          { key: "Cache-Control", value: "no-cache" },
-          { key: "Content-Type", value: "application/javascript; charset=utf-8" },
-        ],
-      },
-    ];
+const config: NextConfig = {
+  reactStrictMode: true,
+  images: {
+    remotePatterns: [
+      { protocol: "https", hostname: "*.supabase.co", pathname: "/storage/v1/object/public/**" },
+    ],
   },
 };
 
-export default nextConfig;
+export default config;

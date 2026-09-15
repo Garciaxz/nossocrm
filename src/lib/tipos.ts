@@ -1,0 +1,166 @@
+/** Tipos do dominio, espelhando os enums do banco. */
+
+export type PapelUsuario = "gerente" | "vendedor" | "diretoria";
+
+export type EtapaLead =
+  | "novo"
+  | "em_atendimento"
+  | "medicao"
+  | "orcamento_enviado"
+  | "negociacao"
+  | "ganho"
+  | "perdido";
+
+export type OrigemLead =
+  | "meta_ads"
+  | "google_ads"
+  | "organico"
+  | "indicacao"
+  | "direto"
+  | "desconhecida";
+
+export type TipoCliente =
+  | "consumidor_final"
+  | "arquiteto_designer"
+  | "lojista_revenda"
+  | "construtora"
+  | "nao_definido";
+
+export type TipoAmbiente =
+  | "residencial"
+  | "comercial"
+  | "corporativo"
+  | "industrial"
+  | "nao_definido";
+
+export type CanalTipo = "whatsapp" | "instagram_dm" | "manual";
+export type DirecaoMensagem = "entrada" | "saida";
+export type TipoMidia =
+  | "texto" | "imagem" | "video" | "audio" | "documento" | "localizacao" | "outro";
+export type StatusMedicao = "agendada" | "realizada" | "cancelada" | "nao_compareceu";
+export type StatusOrcamento = "rascunho" | "enviado" | "aceito" | "recusado" | "expirado";
+
+/** Ordem do kanban. A etapa medicao so aparece se o lead for elegivel. */
+export const ETAPAS: { chave: EtapaLead; rotulo: string; cor: string }[] = [
+  { chave: "novo",              rotulo: "Novo",              cor: "bg-marca-200" },
+  { chave: "em_atendimento",    rotulo: "Em atendimento",    cor: "bg-marca-400" },
+  { chave: "medicao",           rotulo: "Medição",           cor: "bg-marca-600" },
+  { chave: "orcamento_enviado", rotulo: "Orçamento enviado", cor: "bg-marca-600" },
+  { chave: "negociacao",        rotulo: "Negociação",        cor: "bg-marca-800" },
+  { chave: "ganho",             rotulo: "Ganho",             cor: "bg-emerald-600" },
+  { chave: "perdido",           rotulo: "Perdido",           cor: "bg-neutral-400" },
+];
+
+export const ROTULO_ORIGEM: Record<OrigemLead, string> = {
+  meta_ads: "Meta Ads",
+  google_ads: "Google Ads",
+  organico: "Orgânico",
+  indicacao: "Indicação",
+  direto: "Direto",
+  desconhecida: "Desconhecida",
+};
+
+export const ROTULO_TIPO_CLIENTE: Record<TipoCliente, string> = {
+  consumidor_final: "Consumidor final",
+  arquiteto_designer: "Arquiteto ou designer",
+  lojista_revenda: "Lojista ou revenda",
+  construtora: "Construtora",
+  nao_definido: "Não definido",
+};
+
+export const ROTULO_AMBIENTE: Record<TipoAmbiente, string> = {
+  residencial: "Residencial",
+  comercial: "Comercial",
+  corporativo: "Corporativo",
+  industrial: "Industrial",
+  nao_definido: "Não definido",
+};
+
+export type Perfil = {
+  id: string;
+  nome: string;
+  email: string;
+  papel: PapelUsuario;
+  telefone: string | null;
+  ativo: boolean;
+  recebe_rodizio: boolean;
+};
+
+export type Lead = {
+  id: string;
+  nome: string | null;
+  telefone: string;
+  telefone_normalizado: string;
+  email: string | null;
+  bairro: string | null;
+  cidade: string | null;
+  linha_id: string | null;
+  produto_id: string | null;
+  metragem_m2: number | null;
+  tipo_ambiente: TipoAmbiente;
+  tipo_cliente: TipoCliente;
+  etapa: EtapaLead;
+  responsavel_id: string | null;
+  valor_estimado: number | null;
+  motivo_perda: string | null;
+  origem: OrigemLead;
+  campanha: string | null;
+  criativo: string | null;
+  palavra_chave: string | null;
+  primeira_mensagem_em: string | null;
+  primeira_resposta_em: string | null;
+  ultima_interacao_em: string | null;
+  criado_em: string;
+};
+
+/** Linha da view vw_leads_completo. */
+export type LeadCompleto = Lead & {
+  linha_nome: string | null;
+  linha_slug: string | null;
+  produto_modelo: string | null;
+  produto_codigo: string | null;
+  responsavel_nome: string | null;
+  tempo_resposta_seg: number | null;
+  elegivel_instalacao: boolean;
+  total_mensagens: number;
+};
+
+export type Mensagem = {
+  id: string;
+  conversa_id: string;
+  lead_id: string;
+  direcao: DirecaoMensagem;
+  tipo: TipoMidia;
+  conteudo: string | null;
+  midia_url: string | null;
+  autor_id: string | null;
+  automatica: boolean;
+  enviada_em: string;
+};
+
+export type LinhaProduto = {
+  id: string;
+  slug: string;
+  nome: string;
+  categoria: string;
+  aceita_instalacao: boolean;
+  metragem_minima_instalacao: number | null;
+  prioridade_trafego: boolean;
+  ativo: boolean;
+  ordem: number;
+};
+
+export type Produto = {
+  id: string;
+  linha_id: string;
+  codigo: string | null;
+  modelo: string;
+  cor: string | null;
+  material: string | null;
+  dimensoes: string | null;
+  m2_por_caixa: number | null;
+  unidade_venda: string;
+  preco_m2: number | null;
+  preco_unidade: number | null;
+  ativo: boolean;
+};
