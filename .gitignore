@@ -9,3 +9,4 @@ build
 *.pem
 .vercel
 next-env.d.ts
+supabase/.temp
