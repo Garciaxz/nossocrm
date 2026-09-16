@@ -12,15 +12,23 @@ export default async function Config() {
 
   const supabase = await criarClienteServidor();
 
-  const [{ data: perfis }, { data: linhas }, { data: produtos }, { data: regras }, { data: scripts }, { data: horarios }] =
-    await Promise.all([
-      supabase.from("perfis").select("*").order("nome").returns<Perfil[]>(),
-      supabase.from("linhas_produto").select("id, nome").eq("ativo", true).order("ordem"),
-      supabase.from("produtos").select("id, linha_id, modelo, codigo, preco_m2, preco_unidade").order("modelo"),
-      supabase.from("regras_classificacao").select("*").order("termo"),
-      supabase.from("scripts_mensagem").select("*").order("chave"),
-      supabase.from("horarios_atendimento").select("*").order("dia_semana"),
-    ]);
+  const [
+    { data: perfis },
+    { data: linhas },
+    { data: produtos },
+    { data: regras },
+    { data: scripts },
+    { data: horarios },
+    { data: instancias },
+  ] = await Promise.all([
+    supabase.from("perfis").select("*").order("nome").returns<Perfil[]>(),
+    supabase.from("linhas_produto").select("id, nome").eq("ativo", true).order("ordem"),
+    supabase.from("produtos").select("id, linha_id, modelo, codigo, preco_m2, preco_unidade").order("modelo"),
+    supabase.from("regras_classificacao").select("*").order("termo"),
+    supabase.from("scripts_mensagem").select("*").order("chave"),
+    supabase.from("horarios_atendimento").select("*").order("dia_semana"),
+    supabase.from("instancias_evolution").select("*").order("atualizado_em", { ascending: false }),
+  ]);
 
   const evolutionPresente = {
     EVOLUTION_API_URL: !!process.env.EVOLUTION_API_URL,
@@ -38,6 +46,7 @@ export default async function Config() {
       scripts={scripts ?? []}
       horarios={horarios ?? []}
       evolutionPresente={evolutionPresente}
+      instancias={instancias ?? []}
     />
   );
 }

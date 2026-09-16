@@ -30,6 +30,8 @@ type MensagemEvolution = {
       externalAdReply?: Record<string, unknown>;
       conversionSource?: string;
     };
+    // connection.update: estado da instancia (open, close, connecting...)
+    state?: string;
   };
 };
 
@@ -85,6 +87,20 @@ export async function POST(req: NextRequest) {
     }
 
     const corpo = (await req.json()) as MensagemEvolution;
+
+    if (corpo.event === "connection.update") {
+      if (!corpo.instance) {
+        return NextResponse.json({ ok: true, ignorado: "connection.update sem instance" });
+      }
+      const supabase = criarClienteAdmin();
+      await supabase.from("instancias_evolution").upsert({
+        instancia: corpo.instance,
+        estado: corpo.data?.state ?? null,
+        dados: corpo.data ?? null,
+        atualizado_em: new Date().toISOString(),
+      });
+      return NextResponse.json({ ok: true });
+    }
 
     if (corpo.event !== "messages.upsert") {
       return NextResponse.json({ ok: true, ignorado: corpo.event });

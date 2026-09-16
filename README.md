@@ -47,6 +47,7 @@ Criar projeto e rodar no SQL Editor, nesta ordem:
 3. `supabase/03_seed.sql`
 4. `supabase/04_realtime.sql` — habilita Realtime em `mensagens`, exigido pela conversa do lead (SPEC 3.4)
 5. `supabase/05_storage.sql` — cria o bucket `biblioteca` e as políticas de Storage, exigido pela tela de Biblioteca (SPEC 3.6)
+6. `supabase/06_instancias.sql` — guarda o estado (`connection.update`) de cada instância da Evolution, mostrado em Configurações → Evolution
 
 Criar o primeiro usuário em Authentication → Users, depois promover a gerente:
 
