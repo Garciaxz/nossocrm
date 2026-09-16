@@ -9,6 +9,9 @@ No SQL Editor do Supabase, **nesta ordem**:
 1. `01_schema.sql` — tipos, tabelas, funções, triggers, views
 2. `02_rls.sql` — políticas de acesso
 3. `03_seed.sql` — catálogo RD, regras de classificação, horário, scripts
+4. `04_realtime.sql` — habilita Realtime na tabela `mensagens`
+5. `05_storage.sql` — cria o bucket `biblioteca` e as políticas de Storage
+6. `06_instancias.sql` — tabela que guarda o último estado (`connection.update`) de cada instância da Evolution
 
 O seed é idempotente nas tabelas com chave natural: rodar de novo não duplica linha de produto, script nem configuração.
 

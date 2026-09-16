@@ -36,6 +36,7 @@ export function ConfigClient(props: {
   scripts: { id: string; chave: string; titulo: string; conteudo: string; ativo: boolean }[];
   horarios: { dia_semana: number; abre: string | null; fecha: string | null; atende: boolean }[];
   evolutionPresente: Record<string, boolean>;
+  instancias: { instancia: string; estado: string | null; atualizado_em: string }[];
 }) {
   const [aba, setAba] = useState<Aba>("usuarios");
 
@@ -64,7 +65,9 @@ export function ConfigClient(props: {
       {aba === "classificacao" && <Classificacao regrasIniciais={props.regras} linhas={props.linhas} />}
       {aba === "scripts" && <Scripts scriptsIniciais={props.scripts} />}
       {aba === "horario" && <Horario horariosIniciais={props.horarios} />}
-      {aba === "evolution" && <Evolution presentes={props.evolutionPresente} />}
+      {aba === "evolution" && (
+        <Evolution presentes={props.evolutionPresente} instancias={props.instancias} />
+      )}
     </div>
   );
 }
